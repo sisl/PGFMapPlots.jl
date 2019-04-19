@@ -1,0 +1,8 @@
+name = "PGFMapPlots"
+uuid = "31f84e6f-ca9b-4774-9be0-c668962cf267"
+authors = ["Duncan Eddy <duncan.eddy@gmail.com>"]
+version = "0.0.0"
+
+[deps]
+PGFPlots = "3b7a836e-365b-5785-a47d-02c71176b4aa"
+WorldMapData = "32d4f7b0-743f-46d6-98a0-ed8cdb29792a"

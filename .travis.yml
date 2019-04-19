@@ -1,0 +1,32 @@
+language: julia
+
+os:
+  - linux
+
+julia:
+  - 1.0
+  - 1.1
+  - nightly
+
+notifications:
+  email: true
+
+matrix:
+  allow_failures:
+    - julia: nightly
+    
+script:
+  - julia --project --check-bounds=yes -e 'import Pkg; Pkg.build(); Pkg.test("PGFMapPlots"; coverage=true)'
+
+# After successfuly build submit coverage report and deploy updated documentation
+# But limit deployment to the linux worker so this is done only once.
+after_success:
+  # Install required packages for coverage and documentation
+  - julia --project -e 'import Pkg; Pkg.add("Coverage");'
+  - julia --project -e 'import Pkg; Pkg.add("Documenter"); Pkg.add("DocumenterTools");'
+
+  # Submit test coverage report
+  - julia --project -e 'using Coverage; Coveralls.submit(Coveralls.process_folder())'
+
+  # Build and deploy documentation
+  - julia --project ./docs/make.jl
