@@ -71,6 +71,12 @@ function plotmap(;llcrnrlon::Real=-180.0, llcrnrlat::Real=-90.0,
 
         # Load land data 
         for lvl in 1:landlevel
+            if (landresolution == :CRUDE) && (lvl == 4)
+                # Skip plotting this combination since the data
+                # doesn't exist in the GSHHS data
+                continue
+            end
+                
             land_data = load_GSHHS_data(resolution=landresolution, level=lvl)
 
             for ply in land_data.shapes
@@ -84,7 +90,7 @@ function plotmap(;llcrnrlon::Real=-180.0, llcrnrlat::Real=-90.0,
         ant_data = load_GSHHS_data(resolution=landresolution, level=6)
         
         for ply in ant_data.shapes
-            if in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
+            if any_in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
                 push!(lines, PGFPlots.Plots.Linear(extract_points(ply)..., style=landstyle))
             end
         end
@@ -98,7 +104,7 @@ function plotmap(;llcrnrlon::Real=-180.0, llcrnrlat::Real=-90.0,
             border_data = load_WDBII_border_data(resolution=borderresolution, level=lvl)
 
             for ply in border_data.shapes
-                if in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
+                if any_in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
                     push!(lines, PGFPlots.Plots.Linear(extract_points(ply)..., style=borderstyle))
                 end
             end
@@ -113,7 +119,7 @@ function plotmap(;llcrnrlon::Real=-180.0, llcrnrlat::Real=-90.0,
             river_data = load_WDBII_river_data(resolution=riverresolution, level=lvl)
 
             for ply in river_data.shapes
-                if in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
+                if any_in_bounds(ply, lblon=llcrnrlon, ublon=urcrnrlon, lblat=llcrnrlat, ublat=urcrnrlat)
                     push!(lines, PGFPlots.Plots.Linear(extract_points(ply)..., style=riverstyle))
                 end
             end
