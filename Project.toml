@@ -4,5 +4,7 @@ authors = ["Duncan Eddy <duncan.eddy@gmail.com>"]
 version = "0.0.0"
 
 [deps]
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 PGFPlots = "3b7a836e-365b-5785-a47d-02c71176b4aa"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 WorldMapData = "32d4f7b0-743f-46d6-98a0-ed8cdb29792a"
