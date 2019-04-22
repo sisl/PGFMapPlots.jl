@@ -49,12 +49,18 @@ Returns:
 - `ax::Axis` Axis
 """
 function plotmap(;llcrnrlon::Real=-180.0, llcrnrlat::Real=-90.0,
-    urcrnrlon::Real=180.0, urcrnrlat::Real=90.0,
-    landresolution::Union{Symbol, Nothing}=nothing, landlevel::Union{Integer, Nothing}=1, landstyle::String="no marks, black, solid",
-    borderresolution::Union{Symbol, Nothing}=nothing, borderlevel::Union{Integer, Nothing}=1, borderstyle::String="no marks, black, solid",
-    riverresolution::Union{Symbol, Nothing}=nothing, riverlevel::Union{Integer, Nothing}=1, riverstyle::String="no marks, black, solid",
-    oceanstyle="",
-    style::String="")
+                urcrnrlon::Real=180.0, urcrnrlat::Real=90.0,
+                landresolution::Union{Symbol, Nothing}=nothing, 
+                landlevel::Union{Integer, Nothing}=1, 
+                landstyle::String="no marks, black, solid",
+                borderresolution::Union{Symbol, Nothing}=nothing, 
+                borderlevel::Union{Integer, Nothing}=1, 
+                borderstyle::String="no marks, black, solid",
+                riverresolution::Union{Symbol, Nothing}=nothing, 
+                riverlevel::Union{Integer, Nothing}=1, 
+                riverstyle::String="no marks, black, solid",
+                oceanstyle="",
+                style::String="")
 
     lines = PGFPlots.Plots.Linear[]
     
